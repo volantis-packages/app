@@ -1,7 +1,7 @@
 {
-    "name": "Volantis.Entity",
+    "name": "Volantis.Module",
     "type": "shared",
-    "description": "Manage entities which contain data fields and can optionally be edited by users",
+    "description": "A library for handling pluggable modules in larger applications",
     "developer": "Volantis Development",
     "website": "https://volantis.dev",
     "dependencies": [

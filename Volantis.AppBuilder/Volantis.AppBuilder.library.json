@@ -1,13 +1,10 @@
 {
-    "name": "Volantis.App",
+    "name": "Volantis.AppBuilder",
     "type": "shared",
     "description": "A full AHK application framework",
     "developer": "Volantis Development",
     "website": "https://volantis.dev",
     "dependencies": [
-        "Volantis.Entity",
-        "Volantis.Query",
-        "Volantis.Module",
-        "Volantis.Theme"
+        "Volantis.App"
     ]
 }

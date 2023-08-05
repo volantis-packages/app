@@ -5,7 +5,6 @@
     "developer": "Volantis Development",
     "website": "https://volantis.dev",
     "dependencies": [
-        "Volantis.Base",
-        "Volantis.Utility"
+        "Volantis.Base"
     ]
 }
