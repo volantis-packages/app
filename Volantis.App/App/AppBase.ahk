@@ -384,6 +384,39 @@ class AppBase {
         )
     }
 
+    RunAhkScript(scriptPath) {
+        SplitPath(A_AhkPath,, &ahkDir)
+
+        if (ahkDir == "") {
+            ahkDir := this.appDir . "\Vendor\AutoHotKey"
+        }
+
+        ahkExe := ahkDir . "\AutoHotkey" . (A_Is64bitOS ? "64" : "32") . ".exe"
+        SplitPath(scriptPath, &scriptDir)
+
+        if (FileExist(ahkExe) && FileExist(scriptPath)) {
+            RunWait(ahkExe . " " . scriptPath,, scriptDir)
+        } else {
+            throw AppException("Could not run AHK script")
+        }
+    }
+
+    UpdateIncludes() {
+        if (AhkIncludeUpdater(this.appDir).UpdateIncludes()) {
+            this.RestartApp()
+        }
+    }
+
+    BuildApp() {
+        scriptPath := this.appDir . "\Scripts\Build.ahk"
+
+        if (FileExist(scriptPath)) {
+            this.RunAhkScript(scriptPath)
+        } else {
+            throw AppException("Could not locate Build script.")
+        }
+    }
+
     AllocConsole() {
         DllCall("AllocConsole")
 
@@ -563,13 +596,17 @@ class AppBase {
         }
     }
 
-    RunApp(config) {
+    RunApp(config, openApp := true) {
         if (this.Config["check_updates_on_start"]) {
             this.CheckForUpdates(false)
         }
 
         if (this.Services.HasParameter("config_path") && !FileExist(this.Parameter["config_path"])) {
             this.InitialSetup(config)
+        }
+
+        if (openApp) {
+            this.OpenApp()
         }
     }
 
@@ -602,6 +639,14 @@ class AppBase {
     RestartApp() {
         event := AppRunEvent(Events.APP_RESTART, this)
         this["manager.event"].DispatchEvent(event)
+
+        if (this.Services.Has("manager.gui")) {
+            guiMgr := this["manager.gui"]
+
+            if (guiMgr.Has("MainWindow")) {
+                guiMgr.StoreWindowState(this["manager.gui"]["MainWindow"])
+            }
+        }
 
         if (this.Services.Has("gdip")) {
             Gdip_Shutdown(this.Services["gdip"].GetHandle())
@@ -739,6 +784,12 @@ class AppBase {
     }
 
     SetTrayMenuItems(menuItems) {
+        if (!A_IsCompiled) {
+            menuItems.Push("")
+            menuItems.Push(Map("label", "Build " . this.appName, "name", "BuildApp"))
+            menuItems.Push(Map("label", "Update Includes", "name", "UpdateIncludes"))
+        }
+
         return menuItems
     }
 
@@ -749,6 +800,10 @@ class AppBase {
             this.RestartApp()
         } else if (result == "ExitApp") {
             this.ExitApp()
+        } else if (result == "BuildApp") {
+            this.BuildApp()
+        } else if (result == "UpdateIncludes") {
+            this.UpdateIncludes()
         }
 
         return result
