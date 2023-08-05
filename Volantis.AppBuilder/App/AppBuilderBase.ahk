@@ -135,10 +135,6 @@ class AppBuilderBase extends AppBase {
             deployers["GitHub"] := GitHubBuildDeployer(this)
         }
 
-        if (buildInfo.DeployToApi) {
-            deployers["Api"] := ApiBuildDeployer(this)
-        }
-
         if (buildInfo.DeployToChocolatey) {
             deployers["Chocolatey"] := ChocoDeployer(this)
         }
