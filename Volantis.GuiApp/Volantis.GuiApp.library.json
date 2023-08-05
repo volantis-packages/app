@@ -1,0 +1,10 @@
+{
+    "name": "Volantis.GuiApp",
+    "type": "shared",
+    "description": "A full AHK application framework",
+    "developer": "Volantis Development",
+    "website": "https://volantis.dev",
+    "dependencies": [
+        "Volantis.App"
+    ]
+}
