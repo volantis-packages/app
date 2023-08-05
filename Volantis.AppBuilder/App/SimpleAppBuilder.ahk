@@ -1,0 +1,3 @@
+class SimpleAppBuilder extends AppBuilderBase {
+
+}

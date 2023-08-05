@@ -2,6 +2,8 @@ class AppBuilderBase extends AppBase {
     GetParameterDefinitions(config) {
         parameters := super.GetParameterDefinitions(config)
         parameters["config_path"] := "@@{app_dir}\@@{app_name}.build.json"
+        parameters["app_libraries"] := config.Has("appLibraries") ? config["appLibraries"] : []
+        parameters["vendor_libraries"] := config.Has("vendorLibraries") ? config["vendorLibraries"] : []
         parameters["config.dist_dir"] := "@@{app_dir}\Dist"
         parameters["config.build_dir"] := "@@{app_dir}\Build"
         parameters["config.icon_file"] := "@@{app_dir}\Resources\Graphics\@@{app_name}.ico"
@@ -20,14 +22,26 @@ class AppBuilderBase extends AppBase {
      * Libraries to copy from Lib directory to the Build directory.
      */
     GetBuildLibs() {
-        return ['Shared']
+        libs := ["Shared"]
+
+        for lib in this.Parameter["app_libraries"] {
+            libs.Push(lib)
+        }
+
+        return libs
     }
 
     /**
      * Libraries to copy from Vendor directory to the Build directory.
      */
     GetVendorLibs() {
-        return []
+        libs := []
+
+        for lib in this.Parameter["vendor_libraries"] {
+            libs.Push(lib)
+        }
+
+        return libs
     }
 
     GetChocoName() {
