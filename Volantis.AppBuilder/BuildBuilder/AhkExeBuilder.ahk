@@ -1,0 +1,80 @@
+class AhkExeBuilder extends BuildBuilderBase {
+    name := "Exe"
+
+    Build(version) {
+        buildDir := this.app.Config["build_dir"]
+        this.ResetBuildDir(buildDir)
+        this.CopyLibraries(buildDir)
+        this.CopyResources(buildDir)
+        this.CopyVendorLibraries(buildDir)
+        result := this.BuildExe(buildDir)
+
+        if (this.app.Config["open_build_dir"]) {
+            Run(buildDir)
+        }
+
+        return result
+    }
+
+    ResetBuildDir(buildDir) {
+        if (DirExist(buildDir)) {
+            DirDelete(buildDir, true)
+        }
+
+        DirCreate(buildDir)
+    }
+
+    CopyLibraries(buildDir) {
+        DirCreate(buildDir . "\Lib")
+
+        for buildIndex, libName in this.app.GetBuildLibs() {
+            DirCopy(this.app.appDir . "\Lib\" . libName, buildDir . "\Lib\" . libName)
+        }
+    }
+
+    CopyResources(buildDir) {
+        DirCopy(this.app.appDir . "\Resources", buildDir . "\Resources")
+    }
+
+    CopyVendorLibraries(buildDir) {
+        DirCreate(buildDir . "\Vendor")
+
+        for buildIndex, libName in this.app.GetVendorLibs() {
+            DirCopy(this.app.appDir . "\Vendor\" . libName, buildDir . "\Vendor\" . libName)
+        }
+    }
+
+    BuildExe(buildDir) {
+        SplitPath(A_AhkPath,, &ahkDir)
+
+        if (ahkDir == "") {
+            ahkDir := this.app.appDir . "\Vendor\AutoHotKey"
+        }
+
+        ahkExe := ahkDir . "\AutoHotkey" . (A_Is64bitOS ? "64" : "32") . ".exe"
+        ahk2Exe := ahkDir . "\Ahk2Exe.exe"
+
+        if (!FileExist(ahk2Exe)) {
+            ahk2Exe := FileSelect(3,, "Please select your Ahk2Exe.exe file", "EXE Files (*.exe)")
+
+            if (ahk2Exe == "") {
+                throw AppBuildException("Could not find Ahk2Exe.exe")
+            }
+        }
+
+        scriptContent := FileRead(this.app.appDir . "\" . this.app.appName . ".ahk")
+        scriptContent := StrReplace(scriptContent, "{{VERSION}}", this.app.Version)
+        buildFile := this.app.appDir . "\" . this.app.appName . "-build.ahk"
+        exeFile := buildDir . "\" . this.app.appName . ".exe"
+
+        if (FileExist(buildFile)) {
+            FileDelete(buildFile)
+        }
+
+        FileAppend(scriptContent, buildFile)
+        runResult := RunWait(ahk2Exe . " /in `"" . buildFile . "`" /out `"" . exeFile . "`" /icon `"" . this.app.Config["icon_file"] . "`" /bin `"" . ahkExe . "`"", this.app.appDir)
+        FileDelete(buildFile)
+
+        return runResult
+    }
+}

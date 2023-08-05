@@ -1,0 +1,3 @@
+class AppBuildException extends ExceptionBase {
+
+}
