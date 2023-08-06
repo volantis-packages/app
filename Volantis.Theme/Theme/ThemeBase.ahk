@@ -8,7 +8,7 @@ class ThemeBase {
     defaultTheme := "Lightpad"
     vars := Map()
     colors := Map("background", "FFFFFF", "text", "000000", "textInactive", "959595", "accent", "9466FC", "accentBright", "EEE6FF", "accentBg", "8A57F0", "transColor", "")
-    themeAssets := Map("logo", "Resources\Graphics\logo.png", "icon", "Resources\Graphics\launchpad.ico", "spinner", "Resources\Graphics\spinner.gif")
+    themeAssets := Map("logo", "resources\graphics\logo.png", "icon", "resources\graphics\icon_64.ico", "spinner", "resources\graphics\spinner.gif")
     symbols := Map()
     buttons := Map("height", Map("s", 20, "m", 30, "l", 40, "xl", 80), "fixedWidth", Map("s", 80, "m", 100, "l", 120, "xl", 140))
     labels := Map("height", "auto", "fixedWidth", 75, "font", "normal")
@@ -26,12 +26,12 @@ class ThemeBase {
     __New(name, resourcesDir, eventMgr, idGeneratorObj, loggerObj := "", autoLoad := false) {
         this.name := name
         this.resourcesDir := resourcesDir
-        this.themesDir := resourcesDir . "\Themes"
+        this.themesDir := resourcesDir . "\themes"
         this.loggerObj := loggerObj
         this.eventMgr := eventMgr
         this.idGeneratorObj := idGeneratorObj
         this.themeId := idGeneratorObj.Generate()
-        
+
         if (autoLoad) {
             this.LoadTheme()
         }
@@ -82,7 +82,7 @@ class ThemeBase {
         exts := [".ico", ".png", ".jpg", ".bmp"]
 
         path := ""
-        basePath := this.resourcesDir . "\Graphics\Icons\" . this.iconTheme . "\" . name
+        basePath := this.resourcesDir . "\graphics\icons\" . this.iconTheme . "\" . name
 
         for index, ext in exts {
             if (FileExist(basePath . ext)) {
@@ -252,7 +252,7 @@ class ThemeBase {
 
         themeName := themeMap != "" ? themeMap["name"] : this.name
         parentTheme := themeMap != "" ? themeMap["parentTheme"] : this.parentTheme
-        
+
         for key, val in themeAssets {
             themeAssets[key] := this.ExpandPath(val, themeName, parentTheme)
         }
@@ -360,7 +360,7 @@ class ThemeBase {
         themeMap := this.GetThemeMap(themeName)
 
         if (!HasBase(themeMap, Map.Prototype)) {
-            InvalidParameterException("The provided theme name cannot be resolved to a valid theme.")
+            throw ValueException("The provided theme name cannot be resolved to a valid theme.")
         }
 
         this.name := themeMap.Has("name") ? themeMap["name"] : themeName
@@ -389,16 +389,16 @@ class ThemeBase {
 
             enabledShape := enabledStyle.Has("shape") ? enabledStyle["shape"] : "ButtonShape"
             states["enabled"] := %enabledShape%(this, content, enabledStyle, drawConfig)
-            
+
             disabledShape := disabledStyle.Has("shape") ? disabledStyle["shape"] : "ButtonShape"
             states["disabled"] := %disabledShape%(this, content, disabledStyle, drawConfig)
-            
+
             hoveredShape := hoveredStyle.Has("shape") ? hoveredStyle["shape"] : "ButtonShape"
             states["hovered"] := %hoveredShape%(this, content, hoveredStyle, drawConfig)
 
             states["enabled"].DrawOn(picObj)
 
-            
+
 
             this.themedButtons[picObj.Hwnd] := Map("picture", picObj, "content", content, "states", states)
         } catch as ex {
@@ -446,7 +446,7 @@ class ThemeBase {
                 }
             }
         }
-        
+
         return btn
     }
 
@@ -503,7 +503,7 @@ class ThemeBase {
         {
             if RegExMatch(options, "\b" valStyle) {
                 style |= (valStyle != "StrikeOut") ? (A_Index-1) : 8
-            }  
+            }
         }
 
         hdc := GetDC()

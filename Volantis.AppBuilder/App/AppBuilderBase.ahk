@@ -6,7 +6,7 @@ class AppBuilderBase extends AppBase {
         parameters["vendor_libraries"] := config.Has("vendorLibraries") ? config["vendorLibraries"] : []
         parameters["config.dist_dir"] := "@@{app_dir}\Dist"
         parameters["config.build_dir"] := "@@{app_dir}\Build"
-        parameters["config.icon_file"] := "@@{app_dir}\Resources\Graphics\@@{app_name}.ico"
+        parameters["config.icon_file"] := "@@{resources_dir}\graphics\icon_64.ico"
         parameters["config.github_username"] := ""
         parameters["config.github_token"] := ""
         parameters["config.github_repo"] := ""

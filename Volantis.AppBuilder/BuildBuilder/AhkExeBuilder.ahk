@@ -33,7 +33,7 @@ class AhkExeBuilder extends BuildBuilderBase {
     }
 
     CopyResources(buildDir) {
-        DirCopy(this.app.appDir . "\Resources", buildDir . "\Resources")
+        DirCopy(this.app.Parameter["resources_dir"], buildDir . "\resources")
     }
 
     CopyVendorLibraries(buildDir) {

@@ -37,7 +37,7 @@ class ModuleBase {
             if (AppBase.Instance) {
                 versionStr := AppBase.Instance.Version
             }
-            
+
             if (versionStr == "{{VERSION}}") {
                 versionStr := "Core"
             }
@@ -71,7 +71,7 @@ class ModuleBase {
             moduleIcon := this.moduleInfo["icon"]
         } else {
             pathBase := this.moduleInfo["dir"] . "\" . this.moduleInfo["name"]
-            resourceBase := pathBase . "\Resources\" . this.moduleInfo["name"]
+            resourceBase := pathBase . "\resources\" . this.moduleInfo["name"]
 
             for index, ext in [".ico", ".icon.png", ".icon.jpg", ".icon.bmp"] {
                 if (FileExist(pathBase . ext)) {
