@@ -1,0 +1,28 @@
+{
+    "name": "Volantis.App",
+    "type": "package",
+    "description": "",
+    "developer": "Volantis Development",
+    "website": "https://volantis.dev",
+    "authors": [
+        {
+            "name": "Ben McClure",
+            "email": "ben@volantisdev.com"
+        }
+    ],
+    "dependencies": {
+        "Volantis.Common": {
+            "version": "^1.0",
+            "libraries": "*"
+        }
+    },
+    "libraries": {
+        "Volantis.App": "Volantis.App",
+        "Volantis.AppBuilder": "Volantis.AppBuilder",
+        "Volantis.CliApp": "Volantis.CliApp",
+        "Volantis.Entity": "Volantis.Entity",
+        "Volantis.GuiApp": "Volantis.GuiApp",
+        "Volantis.Module": "Volantis.Module",
+        "Volantis.Theme": "Volantis.Theme"
+    }
+}
