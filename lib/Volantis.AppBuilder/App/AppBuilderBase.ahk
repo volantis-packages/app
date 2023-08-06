@@ -22,6 +22,7 @@ class AppBuilderBase extends AppBase {
      * Libraries to copy from Lib directory to the Build directory.
      */
     GetBuildLibs() {
+        ; TODO Load libraries from volantis.json (recursively via package management classes)
         libs := ["Shared"]
 
         for lib in this.Parameter["app_libraries"] {

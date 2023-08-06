@@ -17,12 +17,79 @@
         }
     },
     "libraries": {
-        "Volantis.App": "Volantis.App",
-        "Volantis.AppBuilder": "Volantis.AppBuilder",
-        "Volantis.CliApp": "Volantis.CliApp",
-        "Volantis.Entity": "Volantis.Entity",
-        "Volantis.GuiApp": "Volantis.GuiApp",
-        "Volantis.Module": "Volantis.Module",
-        "Volantis.Theme": "Volantis.Theme"
+        "Volantis.App": {
+            "path": "lib/Volantis.App",
+            "uses": [
+                "Volantis.Entity",
+                "Volantis.Common:Volantis.Query",
+                "Volantis.Module",
+                "Volantis.Theme"
+            ]
+        },
+        "Volantis.AppBuilder": {
+            "path": "lib/Volantis.AppBuilder",
+            "uses": [
+                "Volantis.App"
+            ]
+        },
+        "Volantis.CliApp": {
+            "path": "lib/Volantis.CliApp",
+            "uses": [
+                "Volantis.App"
+            ]
+        },
+        "Volantis.Entity": {
+            "path": "lib/Volantis.Entity",
+            "uses": [
+                "Volantis.Common:Volantis.Component"
+            ]
+        },
+        "Volantis.GuiApp": {
+            "path": "lib/Volantis.GuiApp",
+            "uses": [
+                "Volantis.App"
+            ]
+        },
+        "Volantis.Module": {
+            "path": "lib/Volantis.Module",
+            "uses": [
+                "Volantis.Common:Volantis.Component"
+            ]
+        },
+        "Volantis.Theme": {
+            "path": "lib/Volantis.Theme",
+            "uses": [
+                "Volantis.Common:Volantis.Base"
+            ]
+        }
+    },
+    "commands": {
+        "Build": {
+            "script": "cmd/Build.ahk",
+            "includes": [
+                "*"
+            ]
+        },
+        "Test": {
+            "script": "cmd/Test.ahk",
+            "includes": [
+                "*",
+                "test"
+            ]
+        },
+        "UpdateIncludes": {
+            "script": "cmd/UpdateIncludes.ahk",
+            "includes": [
+                "Volantis.Core:Exception/ExceptionBase",
+                "Volantis.Core:Exception/MethodNotImplementedException",
+                "Volantis.Core:Exception/FileSystemException",
+                "Volantis.Core:IncludeBuilder/AhkIncludeBuilder",
+                "Volantis.Core:IncludeBuilder/IncludeBuilderBase",
+                "Volantis.Core:IncludeUpdater/IncludeUpdaterBase",
+                "Volantis.Core:IncludeUpdater/AhkIncludeUpdater",
+                "Volantis.Core:IncludeWriter/AhkIncludeWriter",
+                "Volantis.Core:IncludeWriter/IncludeWriterBase"
+            ]
+        }
     }
 }
