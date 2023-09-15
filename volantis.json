@@ -1,67 +1,51 @@
 {
-    "name": "Volantis.App",
+    "name": "volantis/app",
     "type": "package",
     "description": "",
-    "developer": "Volantis Development",
     "website": "https://volantis.dev",
-    "authors": [
-        {
-            "name": "Ben McClure",
-            "email": "ben@volantisdev.com"
-        }
-    ],
-    "dependencies": {
-        "Volantis.Common": {
-            "version": "^1.0",
-            "libraries": "*"
-        }
+    "authors": [{
+        "name": "Ben McClure",
+        "email": "ben@volantisdev.com"
+    }],
+    "require": {
+        "volantis/backup": "^1.0 || dev-main",
+        "volantis/bulk-operations": "^1.0 || dev-main",
+        "volantis/code-gen": "^1.0 || dev-main",
+        "volantis/gui": "^1.0 || dev-main",
+        "volantis/module": "^1.0 || dev-main",
+        "volantis/task": "^1.0 || dev-main"
     },
     "libraries": {
-        "Volantis.App": {
-            "path": "lib/Volantis.App",
+        "App": {
+            "path": "lib/App",
             "uses": [
-                "Volantis.Entity",
-                "Volantis.Common:Volantis.Query",
-                "Volantis.Module",
-                "Volantis.Theme"
+                "volantis/entity",
+                "volantis/common:Query",
+                "volantis/module",
+                "volantis/gui:Theme"
             ]
         },
-        "Volantis.AppBuilder": {
-            "path": "lib/Volantis.AppBuilder",
+        "AppBuilder": {
+            "path": "lib/AppBuilder",
             "uses": [
-                "Volantis.App"
+                "App"
             ]
         },
-        "Volantis.CliApp": {
-            "path": "lib/Volantis.CliApp",
+        "CliApp": {
+            "path": "lib/CliApp",
             "uses": [
-                "Volantis.App"
+                "App"
             ]
         },
-        "Volantis.Entity": {
-            "path": "lib/Volantis.Entity",
+        "GuiApp": {
+            "path": "lib/GuiApp",
             "uses": [
-                "Volantis.Common:Volantis.Component"
-            ]
-        },
-        "Volantis.GuiApp": {
-            "path": "lib/Volantis.GuiApp",
-            "uses": [
-                "Volantis.App"
-            ]
-        },
-        "Volantis.Module": {
-            "path": "lib/Volantis.Module",
-            "uses": [
-                "Volantis.Common:Volantis.Component"
-            ]
-        },
-        "Volantis.Theme": {
-            "path": "lib/Volantis.Theme",
-            "uses": [
-                "Volantis.Common:Volantis.Base"
+                "App"
             ]
         }
+    },
+    "scripts": {
+
     },
     "commands": {
         "Build": {
@@ -80,15 +64,15 @@
         "UpdateIncludes": {
             "script": "cmd/UpdateIncludes.ahk",
             "includes": [
-                "Volantis.Core:Exception/ExceptionBase",
-                "Volantis.Core:Exception/MethodNotImplementedException",
-                "Volantis.Core:Exception/FileSystemException",
-                "Volantis.Core:IncludeBuilder/AhkIncludeBuilder",
-                "Volantis.Core:IncludeBuilder/IncludeBuilderBase",
-                "Volantis.Core:IncludeUpdater/IncludeUpdaterBase",
-                "Volantis.Core:IncludeUpdater/AhkIncludeUpdater",
-                "Volantis.Core:IncludeWriter/AhkIncludeWriter",
-                "Volantis.Core:IncludeWriter/IncludeWriterBase"
+                "volantis/core:Exception/ExceptionBase",
+                "volantis/core:Exception/MethodNotImplementedException",
+                "volantis/core:Exception/FileSystemException",
+                "volantis/core:IncludeBuilder/AhkIncludeBuilder",
+                "volantis/core:IncludeBuilder/IncludeBuilderBase",
+                "volantis/core:IncludeUpdater/IncludeUpdaterBase",
+                "volantis/core:IncludeUpdater/AhkIncludeUpdater",
+                "volantis/core:IncludeWriter/AhkIncludeWriter",
+                "volantis/core:IncludeWriter/IncludeWriterBase"
             ]
         }
     }
