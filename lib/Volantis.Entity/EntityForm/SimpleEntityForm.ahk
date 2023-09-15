@@ -1,3 +1,0 @@
-class SimpleEntityForm extends EntityFormBase {
-    
-}

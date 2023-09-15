@@ -1,3 +1,0 @@
-class ModuleException extends ExceptionBase {
-    
-}

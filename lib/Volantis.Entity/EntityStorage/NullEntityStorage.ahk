@@ -1,3 +1,0 @@
-class NullEntityStorage extends EntityStorageBase {
-    
-}

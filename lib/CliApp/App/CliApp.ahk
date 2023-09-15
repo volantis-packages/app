@@ -1,0 +1,3 @@
+class CliApp extends AppBase {
+
+}

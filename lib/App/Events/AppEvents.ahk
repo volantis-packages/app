@@ -1,0 +1,20 @@
+class AppEvents {
+    static APP_POST_STARTUP := 0x1002
+    static APP_SERVICES_LOADED := 0x1003
+    static APP_SERVICE_DEFINITIONS := 0x1005
+    static APP_PRE_INITIALIZE := 0x1010
+    static APP_POST_INITIALIZE := 0x1011
+    static APP_PRE_RUN := 0x1015
+    static APP_SHUTDOWN := 0x1020
+    static APP_RESTART := 0x1025
+
+    static APP_MENU_ITEMS_EARLY := 0x1030
+    static APP_MENU_ITEMS_MIDDLE := 0x1032
+    static APP_MENU_ITEMS_LATE := 0x1034
+    static APP_MENU_ITEMS_ALTER := 0x1036
+    static APP_MENU_TOOLS_ITEMS_ALTER := 0x1038
+    static APP_MENU_ABOUT_ITEMS_ALTER := 0x1040
+    static APP_MENU_PROCESS_RESULT := 0x1042
+
+    static APP_GET_RELEASE_INFO := 0x1050
+}

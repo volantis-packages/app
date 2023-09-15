@@ -1,3 +1,0 @@
-class BasicOpError extends OpErrorBase {
-
-}

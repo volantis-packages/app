@@ -1,2 +1,0 @@
-class FileEntityField extends FileEntityFieldBase {
-}

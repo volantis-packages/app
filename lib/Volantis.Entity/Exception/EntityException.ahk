@@ -1,3 +1,0 @@
-class EntityException extends ExceptionBase {
-
-}

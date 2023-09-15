@@ -1,3 +1,0 @@
-class BasicEntityType extends EntityTypeBase {
-    
-}

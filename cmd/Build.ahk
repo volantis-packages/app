@@ -1,9 +1,9 @@
 ﻿TraySetIcon("{{APPICON}}")
 
-SimpleAppBuilder(Map(
+SimpleAppBuilder(
     "appDir", "{{APPDIR}}",
     "appName", "{{APPNAME}}",
     "version", "{{VERSION}}",
     "trayIcon", "{{APPICON}}",
     "console", true,
-))
+)

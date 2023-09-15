@@ -1,3 +1,0 @@
-class SimpleEntityEditor extends EntityEditorBase {
-
-}

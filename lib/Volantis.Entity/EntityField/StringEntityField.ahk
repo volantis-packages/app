@@ -1,2 +1,0 @@
-class StringEntityField extends EntityFieldBase {
-}

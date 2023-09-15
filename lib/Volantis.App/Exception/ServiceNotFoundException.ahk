@@ -1,3 +1,0 @@
-class ServiceNotFoundException extends AppException {
-    
-}
